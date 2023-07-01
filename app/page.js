@@ -29,7 +29,8 @@ import useSWR from "swr";
 export default function Home() {
   // const data = await givePrompt();
   // console.log(data[0].candidates[0].output);
-  const limitNormal = 8;
+  const w = window.innerWidth;
+  const limitNormal = w <= "639" ? 4 : 8;
   const { data: movieGenreList, errorMovie } = useSWR(
     "/api/genre/movie/list",
     fetcher
@@ -51,7 +52,7 @@ export default function Home() {
               title="Popular"
               media_type="movie"
               type="movie"
-              genreList={movieGenreList}
+              genreMovieList={movieGenreList}
             />
             <div className="divider"></div>
             <Collection
@@ -62,8 +63,31 @@ export default function Home() {
               title="Popular"
               media_type="tv"
               type="tv"
-              genreList={tvGenreList}
+              genreTVList={tvGenreList}
             />
+            <div className="divider"></div>
+            <Collection
+              isHomePage
+              endpoint="/api/trending/all/day/1"
+              href="/trending/all/day/1"
+              limit={limitNormal}
+              title="Trending"
+              type="Day"
+              genreMovieList={movieGenreList}
+              genreTVList={tvGenreList}
+            />
+            <div className="divider"></div>
+            <Collection
+              isHomePage
+              endpoint="/api/trending/all/week/1"
+              href="/trending/all/week/1"
+              limit={limitNormal}
+              title="Trending"
+              type="Week"
+              genreMovieList={movieGenreList}
+              genreTVList={tvGenreList}
+            />
+            <div className="pb-8"></div>
           </div>
         </main>
       ) : (

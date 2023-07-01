@@ -17,7 +17,7 @@ function Page() {
 
   const handleForm = async (event) => {
     event.preventDefault();
-    console.log(password);
+
     const { result, error } = await SignIn(email, password.password);
 
     if (error) {

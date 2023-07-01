@@ -21,11 +21,19 @@ export const toBase64 = (str) =>
     ? Buffer.from(str).toString("base64")
     : window.btoa(str);
 
-export const renderResults = (array, Component, media_type, genreList) => {
+export const renderResults = (
+  array,
+  Component,
+  media_type,
+  genreMovieList,
+  genreTVList
+) => {
   return array.map((item) => {
     const genreIds = item.genre_ids;
     const genre = genreIds.map((id) => {
-      return genreList.genres.find((x) => x.id === id);
+      return item.media_type === "tv" || media_type === "tv"
+        ? genreTVList.genres.find((x) => x.id === id)
+        : genreMovieList.genres.find((x) => x.id === id);
     });
 
     return (

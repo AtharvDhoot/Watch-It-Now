@@ -46,7 +46,7 @@ export default function Home() {
           <div className="container mx-auto min-h-screen">
             <Collection
               isHomePage
-              endpoint="/api/movie/popular/1"
+              endpoint="/api/movie/popular/1?isFirst=true"
               href="/movie/popular/1"
               limit={limitNormal}
               title="Popular"
@@ -57,7 +57,7 @@ export default function Home() {
             <div className="divider"></div>
             <Collection
               isHomePage
-              endpoint="/api/tv/popular/1"
+              endpoint="/api/tv/popular/1?isFirst=true"
               href="/tv/popular/1"
               limit={limitNormal}
               title="Popular"
@@ -68,7 +68,7 @@ export default function Home() {
             <div className="divider"></div>
             <Collection
               isHomePage
-              endpoint="/api/trending/all/day/1"
+              endpoint="/api/trending/all/day/1?isFirst=true"
               href="/trending/all/day/1"
               limit={limitNormal}
               title="Trending"
@@ -79,7 +79,7 @@ export default function Home() {
             <div className="divider"></div>
             <Collection
               isHomePage
-              endpoint="/api/trending/all/week/1"
+              endpoint="/api/trending/all/week/1?isFirst=true"
               href="/trending/all/week/1"
               limit={limitNormal}
               title="Trending"

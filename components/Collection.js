@@ -19,12 +19,21 @@ export default function Collection({
   genreTVList,
 }) {
   const { data, error } = useSWR(endpoint, fetcher);
-
+  console.log(title, data);
   if (error) return <div>Error occurred</div>;
+
+  const officialTrailerKey = data?.videos
+    ? data.videos.map((item) => {
+        const v = item.results.find(
+          (video) => video.type === "Trailer" && video.official
+        );
+        return { id: item.id, video: v };
+      })
+    : true;
 
   return (
     <>
-      {data ? (
+      {data && officialTrailerKey ? (
         <div>
           <Heading
             title={title}
@@ -38,7 +47,8 @@ export default function Collection({
               Component,
               media_type,
               genreMovieList,
-              genreTVList
+              genreTVList,
+              officialTrailerKey
             )}
           </div>
         </div>

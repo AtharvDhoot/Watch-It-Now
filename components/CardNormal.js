@@ -10,6 +10,7 @@ export default function CardNormal({
   title,
   year,
   genre,
+  officialTrailerKey,
 }) {
   const router = useRouter();
 
@@ -22,11 +23,12 @@ export default function CardNormal({
   };
 
   return (
-    <div
-      className="grow basis-1/5 w-full cursor-pointer mb-4 sm:mb-0"
-      onClick={handleClick}
-    >
-      <CardImage src={src} alt={title} />
+    <div className="grow basis-1/5 w-full cursor-pointer mb-4 sm:mb-0">
+      <CardImage
+        src={src}
+        alt={title}
+        officialTrailerKey={officialTrailerKey}
+      />
       <CardInfo
         id={id}
         category={category}
@@ -34,6 +36,7 @@ export default function CardNormal({
         title={title}
         year={year}
         genre={genre}
+        onClick={handleClick}
       />
     </div>
   );

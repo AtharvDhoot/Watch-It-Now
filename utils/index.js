@@ -26,7 +26,8 @@ export const renderResults = (
   Component,
   media_type,
   genreMovieList,
-  genreTVList
+  genreTVList,
+  officialTrailerKey
 ) => {
   return array.map((item) => {
     const genreIds = item.genre_ids;
@@ -35,7 +36,10 @@ export const renderResults = (
         ? genreTVList.genres.find((x) => x.id === id)
         : genreMovieList.genres.find((x) => x.id === id);
     });
-
+    let video;
+    if (officialTrailerKey !== true && officialTrailerKey) {
+      video = officialTrailerKey.find((v) => v.id === item.id);
+    }
     return (
       <Component
         key={item.id || uuidv4()}
@@ -52,6 +56,7 @@ export const renderResults = (
         }
         year={item.release_date || item.first_air_date}
         genre={genre}
+        officialTrailerKey={video}
       />
     );
   });

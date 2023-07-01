@@ -1,6 +1,6 @@
-export default function CardInfo({ title, year, genre }) {
+export default function CardInfo({ title, year, genre, onClick }) {
   return (
-    <div>
+    <div onClick={onClick}>
       <div className="mt-2 flex text-xs font-light md:text-sm">
         <p>{renderYear(year)}</p>
         <div className='flex items-center px-2 before:content-["•"] gap-2'>

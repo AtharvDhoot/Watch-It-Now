@@ -28,6 +28,7 @@ export default function CardNormal({
         src={src}
         alt={title}
         officialTrailerKey={officialTrailerKey}
+        onClick={handleClick}
       />
       <CardInfo
         id={id}

@@ -13,7 +13,7 @@ export default function CardInfo({ title, year, genre, onClick }) {
           })}
         </div>
       </div>
-      <h2 className="truncate capitalize font-bold text-ellipsis sm:max-w-[200px] hover:max-w-xs">
+      <h2 className="truncate capitalize font-bold text-ellipsis sm:max-w-[200px] hover:max-w-xs hover:underline">
         {title}
       </h2>
     </div>

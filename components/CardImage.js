@@ -4,20 +4,17 @@ import ReactPlayer from "react-player";
 import Loading from "./Loading";
 import { useHover } from "@uidotdev/usehooks";
 
-export default function CardImage({ src, alt, officialTrailerKey }) {
+export default function CardImage({ src, alt, officialTrailerKey, onClick }) {
   const [ref, hovering] = useHover();
 
   return (
     <div className="relative w-full rounded-lg">
-      <div
-        className="relative h-[200px] md:h-[140px] lg:h-[174px] w-full"
-        ref={ref}
-      >
+      <div className="relative h-[200px] w-full" ref={ref}>
         {officialTrailerKey?.video?.key ? (
           hovering ? (
             <ReactPlayer
               width="100%"
-              height="170px"
+              height="200px"
               playing={hovering}
               pip
               controls={true}
@@ -50,6 +47,7 @@ export default function CardImage({ src, alt, officialTrailerKey }) {
               shimmer(240, 140)
             )}`}
             unoptimized
+            onClick={onClick}
           />
         )}
       </div>

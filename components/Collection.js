@@ -18,7 +18,11 @@ export default function Collection({
   genreMovieList,
   genreTVList,
 }) {
-  const { data, error } = useSWR(endpoint, fetcher);
+  const { data, error } = useSWR(endpoint, fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
   console.log(title, data);
   if (error) return <div>Error occurred</div>;
 
@@ -41,7 +45,7 @@ export default function Collection({
             isHomePage={isHomePage}
             media_type={type}
           />
-          <div className="w-full flex flex-col items-center gap-4 sm:gap-x-7 sm:gap-y-6 xl:gap-x-10 xl:gap-y-8 sm:flex-row sm:flex-wrap sm:justify-between">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-between gap-4 mx-6 sm:mx-0">
             {renderResults(
               sliceArray(data.results || [], limit),
               Component,

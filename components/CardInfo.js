@@ -6,8 +6,8 @@ export default function CardInfo({ title, year, genre }) {
         <div className='flex items-center px-2 before:content-["•"] gap-2'>
           {genre.slice(0, 2).map((item) => {
             return (
-              <div key={item.id} className="badge badge-outline">
-                {item.name}
+              <div key={item?.id} className="badge badge-outline">
+                {item?.name}
               </div>
             );
           })}

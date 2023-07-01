@@ -15,7 +15,8 @@ export default function Collection({
   media_type,
   title,
   type,
-  genreList,
+  genreMovieList,
+  genreTVList,
 }) {
   const { data, error } = useSWR(endpoint, fetcher);
 
@@ -36,7 +37,8 @@ export default function Collection({
               sliceArray(data.results || [], limit),
               Component,
               media_type,
-              genreList
+              genreMovieList,
+              genreTVList
             )}
           </div>
         </div>

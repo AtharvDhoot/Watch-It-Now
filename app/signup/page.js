@@ -49,7 +49,7 @@ function Page() {
   return (
     <div className="bg-base-100 h-[84vh] flex flex-col">
       <div className="container max-w-sm md:max-w-md mx-auto flex-1 flex flex-col items-center justify-center p-4 md:p-0">
-        <div className="bg-base-200 px-6 py-8 rounded-xl shadow-md text-base-content w-full">
+        <div className="bg-primary bg-opacity-20 px-6 py-8 rounded-xl shadow-md text-base-content w-full">
           <h1 className="mb-8 text-3xl text-center">Sign up</h1>
           <form onSubmit={handleForm}>
             <div className="grid gap-6">

@@ -23,7 +23,6 @@ export default function Collection({
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
-  console.log(title, data);
   if (error) return <div>Error occurred</div>;
 
   const officialTrailerKey = data?.videos

@@ -9,7 +9,7 @@ export default function Pagination({
   totalPages,
 }) {
   return (
-    <div className="mt-12 pb-8 flex items-center justify-center join">
+    <div className="mt-8 pb-8 flex items-center justify-center join">
       <Link
         href={prevHref}
         className={`${isFirst ? "btn-disabled" : ""} join-item btn btn-outline`}

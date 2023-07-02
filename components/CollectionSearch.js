@@ -10,7 +10,7 @@ export default function CollectionSearch({
 }) {
   return (
     <>
-      <section className="w-full flex flex-col items-center gap-4 sm:gap-x-7 sm:gap-y-6 xl:gap-x-10 xl:gap-y-8 sm:flex-row sm:flex-wrap sm:justify-between">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-between mx-6 sm:mx-0 gap-4">
         {renderResults(
           sliceArray(arr, limit),
           CardNormal,

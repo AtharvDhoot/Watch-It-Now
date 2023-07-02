@@ -155,7 +155,9 @@ export default function Movie({ params }) {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Website <LinkIcon className="hidden sm:flex" />
+                      <div className="flex place-items-center text-xs sm:text-sm gap-1 sm:gap-2">
+                        Website <LinkIcon className="hidden sm:flex" />
+                      </div>
                     </a>
                   ) : null}
                   {movie?.detail?.imdb_id ? (
@@ -165,12 +167,16 @@ export default function Movie({ params }) {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      IMDB <LaunchIcon className="hidden sm:flex" />
+                      <div className="flex place-items-center text-xs sm:text-sm gap-1 sm:gap-2">
+                        IMDB <LaunchIcon className="hidden sm:flex" />
+                      </div>
                     </a>
                   ) : null}
                   {officialTrailerKey ? (
                     <button className="btn" onClick={handelImage}>
-                      Trailer <YouTubeIcon className="hidden sm:flex" />
+                      <div className="flex place-items-center text-xs sm:text-sm gap-1 sm:gap-2">
+                        Trailer <YouTubeIcon className="hidden sm:flex" />
+                      </div>
                     </button>
                   ) : null}
                 </div>

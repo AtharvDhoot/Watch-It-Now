@@ -7,11 +7,13 @@ import { ThemeChangeButton } from "./ThemeChangeButton";
 import NavItems from "./NavItems";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import SearchBar from "./SearchBar";
+import { pathToSearchAll } from "@/utils";
 
 export default function Navbar(props) {
   return (
     <nav className="navbar h-[8vh] bg-base-100 px-6 md:px-12">
-      <div className="container m-auto grid grid-cols-2 md:grid-cols-5">
+      <div className="container m-auto grid grid-cols-2 md:grid-cols-8">
         <div className="col-span-1">
           <Link href={props.title.route} className="text-xl normal-case">
             <Image
@@ -24,7 +26,9 @@ export default function Navbar(props) {
             />
           </Link>
         </div>
-
+        <div className="ml-4 hidden md:flex md:col-span-3">
+          <SearchBar searchPath={pathToSearchAll} />
+        </div>
         <div className="col-span-1 md:col-span-4 place-self-end">
           <div className={"hidden md:flex"}>
             <NavItems items={GetListItems(props.navItems)} />

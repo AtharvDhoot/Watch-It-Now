@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Heading({ href, isHomePage, media_type, title }) {
   return (
-    <div className="mb-8 flex items-end justify-between">
+    <div className="mb-8 flex items-end justify-between mx-6 md:mx-0">
       {isHomePage ? (
         <div className="flex items-center">
           <h2 className="text-2xl font-bold leading-7 sm:truncate sm:text-3xl sm:tracking-tight">

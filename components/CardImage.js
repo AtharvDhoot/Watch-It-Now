@@ -44,7 +44,7 @@ export default function CardImage({ src, alt, officialTrailerKey, onClick }) {
             style={{ objectFit: "scale-down" }}
             placeholder="blur"
             blurDataURL={`data:image/svg+xml;base64,${toBase64(
-              shimmer(240, 140)
+              shimmer(200, 200)
             )}`}
             unoptimized
             onClick={onClick}

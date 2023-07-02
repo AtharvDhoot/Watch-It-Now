@@ -3,7 +3,8 @@
 
 import Collection from "@/components/Collection";
 import Loading from "@/components/Loading";
-import { fetcher } from "@/utils";
+import SearchBar from "@/components/SearchBar";
+import { fetcher, pathToSearchAll } from "@/utils";
 import useSWR from "swr";
 
 // const { GoogleAuth } = require("google-auth-library");
@@ -44,6 +45,9 @@ export default function Home() {
       {movieGenreList && tvGenreList ? (
         <main className="bg-base-100">
           <div className="container mx-auto min-h-screen">
+            <div className="flex md:hidden mb-4 mx-4 pt-2">
+              <SearchBar searchPath={pathToSearchAll} />
+            </div>
             <Collection
               isHomePage
               endpoint="/api/movie/popular/1?isFirst=true"

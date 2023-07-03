@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useState } from "react";
 import ReactPlayer from "react-player";
 import Loading from "@/components/Loading";
+import Link from "next/link";
 
 export default function Movie({ params }) {
   const { id } = params;
@@ -135,21 +136,23 @@ export default function Movie({ params }) {
                   <p className="font-semibold text-2xl ">Synopsis</p>
                   <div className="text-sm">{movie?.detail?.overview}</div>
                 </div>
-                <div className="grid mt-6">
-                  <p className="font-semibold text-2xl ">Casts</p>
-                  <div className="flex gap-2 mt-2 flex-wrap">
-                    {movie?.credits?.cast
-                      .filter((item) => item.order < 5)
-                      .map((item) => (
-                        <div className="badge badge-outline" key={item.id}>
-                          {item.name}
-                        </div>
-                      ))}
+                {movie?.credits?.cast.length > 0 ? (
+                  <div className="grid mt-6">
+                    <p className="font-semibold text-2xl ">Cast</p>
+                    <div className="flex gap-2 mt-2 flex-wrap">
+                      {movie?.credits?.cast
+                        .filter((item) => item.order < 5)
+                        .map((item) => (
+                          <div className="badge badge-outline" key={item.id}>
+                            {item.name}
+                          </div>
+                        ))}
+                    </div>
                   </div>
-                </div>
+                ) : null}
                 <div className="grid grid-cols-3 mt-12 gap-4 md:w-4/5 lg:w-full xl:w-4/5 pb-8">
                   {movie?.detail?.homepage ? (
-                    <a
+                    <Link
                       className="btn"
                       href={movie?.detail?.homepage}
                       target="_blank"
@@ -158,10 +161,10 @@ export default function Movie({ params }) {
                       <div className="flex place-items-center text-xs sm:text-sm gap-1 sm:gap-2">
                         Website <LinkIcon className="hidden sm:flex" />
                       </div>
-                    </a>
+                    </Link>
                   ) : null}
                   {movie?.detail?.imdb_id ? (
-                    <a
+                    <Link
                       className="btn"
                       href={`https://www.imdb.com/title/${movie?.detail?.imdb_id}`}
                       target="_blank"
@@ -170,7 +173,7 @@ export default function Movie({ params }) {
                       <div className="flex place-items-center text-xs sm:text-sm gap-1 sm:gap-2">
                         IMDB <LaunchIcon className="hidden sm:flex" />
                       </div>
-                    </a>
+                    </Link>
                   ) : null}
                   {officialTrailerKey ? (
                     <button className="btn" onClick={handelImage}>

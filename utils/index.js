@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 
 // CONSTANTS
 export const TMDB_ENDPOINT = "https://api.themoviedb.org/3";
-export const TMDB_API_KEY = process.env.TMDB_API_KEY;
+export const TMDB_API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 export const TMDB_IMAGE_ENDPOINT = "https://image.tmdb.org/t/p/original";
 
 // Search path
@@ -30,12 +30,19 @@ export const renderResults = (
   officialTrailerKey
 ) => {
   return array.map((item) => {
-    const genreIds = item.genre_ids;
-    const genre = genreIds.map((id) => {
-      return item.media_type === "tv" || media_type === "tv"
-        ? genreTVList.genres.find((x) => x.id === id)
-        : genreMovieList.genres.find((x) => x.id === id);
-    });
+    const genreIds = item?.genre_ids;
+    const genre = genreIds
+      ? genreIds.map((id) => {
+          const a = genreTVList.genres.find((x) => x.id === id);
+          const b = genreMovieList.genres.find((x) => x.id === id);
+          if (a) {
+            return a;
+          }
+          if (b) {
+            return b;
+          }
+        })
+      : null;
     let video;
     if (officialTrailerKey !== true && officialTrailerKey) {
       video = officialTrailerKey.find((v) => v.id === item.id);

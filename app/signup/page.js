@@ -6,6 +6,7 @@ import SignUp from "@/firebase/auth/SignUp";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Link from "next/link";
 
 function Page() {
   const [email, setEmail] = useState("");
@@ -143,12 +144,12 @@ function Page() {
 
         <div className=" mt-6">
           Already have an account?{" "}
-          <a
+          <Link
             className="no-underline border-b border-blue text-blue"
             href="/signin"
           >
             Log in
-          </a>
+          </Link>
         </div>
       </div>
     </div>

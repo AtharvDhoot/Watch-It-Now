@@ -15,26 +15,16 @@ export default function TrendingAllWeek({ params }) {
   );
   const isFirst = currentPage === 1;
   const isLast = data ? currentPage === data.total_pages : false;
-  const { data: movieGenreList, errorMovie } = useSWR(
-    "/api/genre/movie/list",
-    fetcher
-  );
-  const { data: tvGenreList, errorTv } = useSWR("/api/genre/tv/list", fetcher);
   return (
     <>
       <main className="bg-base-100">
         <div className="container mx-auto">
-          {data && movieGenreList && tvGenreList ? (
+          {data ? (
             <>
               <h1 className="flex w-full place-content-center font-bold text-4xl mb-4">
                 Trending weekly
               </h1>
-              <CollectionSearch
-                isGenre
-                arr={data.results}
-                genreMovieList={movieGenreList}
-                genreTVList={tvGenreList}
-              />
+              <CollectionSearch isGenre arr={data.results} />
               <Pagination
                 currentPage={currentPage}
                 prevHref={`/trending/all/week/${currentPage - 1}`}

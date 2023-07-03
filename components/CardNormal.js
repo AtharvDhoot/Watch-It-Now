@@ -12,23 +12,14 @@ export default function CardNormal({
   genre,
   officialTrailerKey,
 }) {
-  const router = useRouter();
-
-  const handleClick = () => {
-    if (category === "movie") {
-      router.push(`/movie/${id}`);
-    } else if (category === "tv") {
-      router.push(`/tv/${id}`);
-    }
-  };
-
   return (
-    <div className="grow basis-1/5 w-full cursor-pointer mb-4 sm:mb-0">
+    <div className="grow basis-1/5 w-full mb-4 sm:mb-0">
       <CardImage
         src={src}
         alt={title}
         officialTrailerKey={officialTrailerKey}
-        onClick={handleClick}
+        category={category}
+        id={id}
       />
       <CardInfo
         id={id}
@@ -37,7 +28,6 @@ export default function CardNormal({
         title={title}
         year={year}
         genre={genre}
-        onClick={handleClick}
       />
     </div>
   );

@@ -1,4 +1,3 @@
-// const { TextServiceClient } = require("@google-ai/generativelanguage").v1beta2;
 "use client";
 
 import Collection from "@/components/Collection";
@@ -6,6 +5,8 @@ import Loading from "@/components/Loading";
 import SearchBar from "@/components/SearchBar";
 import { fetcher, pathToSearchAll } from "@/utils";
 import useSWR from "swr";
+
+// const { TextServiceClient } = require("@google-ai/generativelanguage").v1beta2;
 
 // const { GoogleAuth } = require("google-auth-library");
 
@@ -57,6 +58,7 @@ export default function Home() {
               media_type="movie"
               type="movie"
               genreMovieList={movieGenreList}
+              genreTVList={tvGenreList}
             />
             <div className="divider"></div>
             <Collection
@@ -67,6 +69,7 @@ export default function Home() {
               title="Popular"
               media_type="tv"
               type="tv"
+              genreMovieList={movieGenreList}
               genreTVList={tvGenreList}
             />
             <div className="divider"></div>

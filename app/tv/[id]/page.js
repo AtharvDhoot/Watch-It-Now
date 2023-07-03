@@ -11,6 +11,7 @@ import useSWR from "swr";
 import Image from "next/image";
 import { useState } from "react";
 import ReactPlayer from "react-player";
+import Link from "next/link";
 
 export default function Tv({ params }) {
   const { id } = params;
@@ -131,21 +132,23 @@ export default function Tv({ params }) {
                     <div className="text-sm">{tv?.detail?.overview}</div>
                   </div>
                 ) : null}
-                <div className="grid mt-6">
-                  <p className="font-semibold text-2xl ">Casts</p>
-                  <div className="flex gap-2 mt-2 flex-wrap">
-                    {tv?.credits?.cast
-                      .filter((item) => item.order < 5)
-                      .map((item) => (
-                        <div className="badge badge-outline" key={item.id}>
-                          {item.name}
-                        </div>
-                      ))}
+                {tv?.credits?.cast.length > 0 ? (
+                  <div className="grid mt-6">
+                    <p className="font-semibold text-2xl ">Cast</p>
+                    <div className="flex gap-2 mt-2 flex-wrap">
+                      {tv?.credits?.cast
+                        .filter((item) => item.order < 5)
+                        .map((item) => (
+                          <div className="badge badge-outline" key={item.id}>
+                            {item.name}
+                          </div>
+                        ))}
+                    </div>
                   </div>
-                </div>
+                ) : null}
                 <div className="grid grid-cols-3 mt-12 gap-4 md:w-4/5 lg:w-full xl:w-4/5 pb-8">
                   {tv?.detail?.homepage ? (
-                    <a
+                    <Link
                       className="btn"
                       href={tv?.detail?.homepage}
                       target="_blank"
@@ -154,10 +157,10 @@ export default function Tv({ params }) {
                       <div className="flex place-items-center text-xs sm:text-sm gap-1 sm:gap-2">
                         Website <LinkIcon className="hidden sm:flex" />
                       </div>
-                    </a>
+                    </Link>
                   ) : null}
                   {tv?.detail?.imdb_id ? (
-                    <a
+                    <Link
                       className="btn"
                       href={`https://www.imdb.com/title/${tv?.detail?.imdb_id}`}
                       target="_blank"
@@ -166,7 +169,7 @@ export default function Tv({ params }) {
                       <div className="flex place-items-center text-xs sm:text-sm gap-1 sm:gap-2">
                         IMDB <LaunchIcon className="hidden sm:flex" />
                       </div>
-                    </a>
+                    </Link>
                   ) : null}
                   {officialTrailerKey ? (
                     <button className="btn" onClick={handelImage}>
@@ -185,14 +188,4 @@ export default function Tv({ params }) {
       )}
     </>
   );
-}
-
-function getRevenue(labelValue) {
-  return Math.abs(Number(labelValue)) >= 1.0e9
-    ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(2) + " Billion"
-    : Math.abs(Number(labelValue)) >= 1.0e6
-    ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(0) + " Million"
-    : Math.abs(Number(labelValue)) >= 1.0e3
-    ? (Math.abs(Number(labelValue)) / 1.0e3).toFixed(0) + " K"
-    : Math.abs(Number(labelValue));
 }

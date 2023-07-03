@@ -19,14 +19,10 @@ export default function Search({ params }) {
   const filteredResults = data
     ? data.results.filter((item) => item.media_type !== "person")
     : [];
-  const { data: movieGenreList, errorMovie } = useSWR(
-    "/api/genre/movie/list",
-    fetcher
-  );
-  const { data: tvGenreList, errorTv } = useSWR("/api/genre/tv/list", fetcher);
+
   return (
     <>
-      {data && movieGenreList && tvGenreList ? (
+      {data ? (
         <>
           <main className="bg-base-100">
             <div className="container mx-auto">
@@ -34,8 +30,6 @@ export default function Search({ params }) {
                 arr={filteredResults}
                 searchTerm={query}
                 totalResult={data.total_results}
-                genreMovieList={movieGenreList}
-                genreTVList={tvGenreList}
               />
               <Pagination
                 currentPage={currentPage}

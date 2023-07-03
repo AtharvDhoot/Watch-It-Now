@@ -23,7 +23,7 @@ export default function SearchBar({
     <form onSubmit={handleSearch} className="flex grow place-items-center">
       <SearchIcon />
       <input
-        className="input w-full"
+        className={`input w-full`}
         type="text"
         placeholder={placeholder}
         onChange={(e) => setQuery(e.target.value)}

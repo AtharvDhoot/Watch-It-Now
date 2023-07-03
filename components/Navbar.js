@@ -59,7 +59,7 @@ function GetListItems(navItems) {
       >
         {item.label}
         <span
-          className={`h-[1px] inline-block absolute left-0 -bottom-0.5 bg-white 
+          className={`h-[1px] inline-block absolute left-0 -bottom-0.5 bg-base-content 
                       group-hover:w-full transition-[width] ease duration-300
                       ${pathname === item.route ? "w-full" : "w-0"}`}
         >

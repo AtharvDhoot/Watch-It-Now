@@ -37,6 +37,7 @@ export default function Suggestions() {
   const [searchRes, setSearchRes] = useState(null);
   const [showRes, setShowRes] = useState(false);
   const [submitted, setSubmitted] = useState(null);
+  const [suggestionCount, setSuggestionCount] = useState(0);
 
   const handleOnFocus = (e) => {
     e.target.setAttribute(
@@ -55,6 +56,12 @@ export default function Suggestions() {
     if (query.length === 0) {
       return;
     } else {
+      const nextCount = suggestionCount + 1;
+      setSuggestionCount(nextCount);
+      if (nextCount > 5) {
+        window.my_modal_1.showModal();
+        return;
+      }
       setSubmitted(true);
       const data = await getSearchResults(query);
       console.log(data);
@@ -79,6 +86,18 @@ export default function Suggestions() {
               AI-Powered Recommendations for Every Mood
             </p>
           </div>
+          <dialog id="my_modal_1" className="modal">
+            <form method="dialog" className="modal-box">
+              <h3 className="font-bold text-lg">Wait a moment!</h3>
+              <p className="py-4">
+                You have already used AI recommendations for 5 times. Please
+                come back tomorrow.
+              </p>
+              <div className="modal-action">
+                <button className="btn">Close</button>
+              </div>
+            </form>
+          </dialog>
           <div className="grid place-items-center mt-8">
             <div className="w-1/2">
               <form

@@ -4,33 +4,10 @@ import Collection from "@/components/Collection";
 import Loading from "@/components/Loading";
 import SearchBar from "@/components/SearchBar";
 import { fetcher, pathToSearchAll } from "@/utils";
+import { ToastContainer } from "react-toastify";
 import useSWR from "swr";
 
-// const { TextServiceClient } = require("@google-ai/generativelanguage").v1beta2;
-
-// const { GoogleAuth } = require("google-auth-library");
-
-// async function givePrompt() {
-//   const MODEL_NAME = "models/text-bison-001";
-//   const PALM_API_KEY = process.env.PALM_API_KEY;
-
-//   const client = new TextServiceClient({
-//     authClient: new GoogleAuth().fromAPIKey(PALM_API_KEY),
-//   });
-
-//   const prompt = "Repeat after me: one, two,";
-
-//   return await client.generateText({
-//     model: MODEL_NAME,
-//     prompt: {
-//       text: prompt,
-//     },
-//   });
-// }
-
 export default function Home() {
-  // const data = await givePrompt();
-  // console.log(data[0].candidates[0].output);
   const w = window.innerWidth;
   const limitNormal = w <= "639" ? 4 : 8;
   const { data: movieGenreList, errorMovie } = useSWR(
@@ -49,6 +26,15 @@ export default function Home() {
             <div className="flex md:hidden mb-4 mx-4 pt-2">
               <SearchBar searchPath={pathToSearchAll} />
             </div>
+            <ToastContainer
+              position="bottom-right"
+              autoClose={3000}
+              hideProgressBar
+              theme={
+                localStorage.getItem("theme") === "night" ? "dark" : "light"
+              }
+              limit={1}
+            />
             <Collection
               isHomePage
               endpoint="/api/movie/popular/1?isFirst=true"

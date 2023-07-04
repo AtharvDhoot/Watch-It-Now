@@ -16,7 +16,7 @@ export async function GET(req, { params }) {
   const prompt =
     "I like " +
     query +
-    " can you recommend me movies, tv series i would enjoy based on what i liked and just give the title name and seprate by empty line dont mention anything else";
+    " can you recommend me atleast 10 movies or tv series that I would enjoy based on what i liked and just give the title name and seprate by empty line dont mention anything else";
   try {
     const data = await client.generateText({
       model: MODEL_NAME,

@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import CardImage from "./CardImage";
 import CardInfo from "./CardInfo";
 

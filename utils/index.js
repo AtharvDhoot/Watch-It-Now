@@ -58,9 +58,7 @@ export const renderResults = (
             ? `${TMDB_IMAGE_ENDPOINT}/${item.backdrop_path}`
             : `${TMDB_IMAGE_ENDPOINT}/${item.poster_path}`
         }
-        title={
-          item.title ? item.title : item.original_name || item.original_title
-        }
+        title={item.title ? item.title : item.name}
         year={item.release_date || item.first_air_date}
         genre={genre}
         officialTrailerKey={video}

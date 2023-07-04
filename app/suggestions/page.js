@@ -22,10 +22,25 @@ async function getSearchResultData(titles) {
       return resp.json();
     })
   );
-  const topSearch = searchResponse
-    .map((item) => (item.results.length > 0 ? item.results[0] : null))
+  const filteredSearch = searchResponse
+    .map((item) => (item.results.length > 0 ? item.results : null))
     .filter((n) => n)
     .filter((item) => item.media_type !== "person");
+
+  let topSearch = filteredSearch.map((searchRes) => {
+    return searchRes
+      .map((item) =>
+        titles.find(
+          (t) => t === item.original_name || t === item.name || t === item.title
+        )
+          ? item
+          : null
+      )
+      .filter((i) => i);
+  });
+  topSearch = topSearch
+    .map((item) => (item.length > 0 ? item[0] : null))
+    .filter((item) => item);
   return {
     results: topSearch,
   };
@@ -58,17 +73,16 @@ export default function Suggestions() {
     } else {
       const nextCount = suggestionCount + 1;
       setSuggestionCount(nextCount);
-      if (nextCount > 5) {
+      if (nextCount > 10) {
         window.my_modal_1.showModal();
         return;
       }
       setSubmitted(true);
       const data = await getSearchResults(query);
-      console.log(data);
-      const ai_response = data.response.split("\n");
-      console.log(ai_response);
+      const ai_response = data.response
+        .split("\n")
+        .map((item) => item.replaceAll("*", "").trim());
       const titlesRecommended = await getSearchResultData(ai_response);
-      console.log(titlesRecommended);
       setShowRes(true);
       setSearchRes(titlesRecommended);
     }
@@ -125,7 +139,13 @@ export default function Suggestions() {
                 <div className="flex w-full place-content-center font-bold text-4xl mb-4">
                   Here are the Recommendations
                 </div>
-                <CollectionSearch arr={searchRes.results} />
+                {searchRes.results.length > 0 ? (
+                  <CollectionSearch arr={searchRes.results} />
+                ) : (
+                  <div>
+                    Can&apos;t find any recommendations. Please try again
+                  </div>
+                )}
               </div>
             ) : (
               <Loading />

@@ -47,7 +47,7 @@ export default function Tv({ params }) {
                     height={530}
                     placeholder="blur"
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                      shimmer(350, 530)
+                      shimmer(2, 2)
                     )}`}
                     unoptimized
                   />

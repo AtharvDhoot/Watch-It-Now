@@ -44,7 +44,7 @@ export default function CardInfo({ id, category, title, year, genre }) {
                   return (
                     <div
                       key={item?.id}
-                      className="badge badge-outline text-ellipsis line-clamp-1 max-w-[100px]"
+                      className="badge badge-outline text-ellipsis line-clamp-1 max-w-[100px] capitalize"
                     >
                       {item?.name}
                     </div>

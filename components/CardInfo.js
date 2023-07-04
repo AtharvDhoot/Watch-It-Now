@@ -9,10 +9,14 @@ export default function CardInfo({ id, category, title, year, genre }) {
     if (category === "movie") {
       const ids = JSON.parse(localStorage.getItem("watch-later-movies"));
       if (ids) {
-        localStorage.setItem(
-          "watch-later-movies",
-          JSON.stringify([...ids, id])
-        );
+        !ids.includes(id)
+          ? localStorage.setItem(
+              "watch-later-movies",
+              JSON.stringify([...ids, id])
+            )
+          : toast.error("The title is already added in your watch list", {
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
       } else {
         localStorage.setItem("watch-later-movies", JSON.stringify([id]));
       }

@@ -34,10 +34,10 @@ export default function CardImage({
               src={src}
               alt={alt}
               fill
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "scale-down" }}
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                shimmer(200, 200)
+                shimmer(400, 200)
               )}`}
               unoptimized
             />
@@ -52,7 +52,7 @@ export default function CardImage({
               style={{ objectFit: "scale-down" }}
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                shimmer(200, 200)
+                shimmer(400, 200)
               )}`}
               unoptimized
             />

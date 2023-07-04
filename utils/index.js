@@ -30,19 +30,24 @@ export const renderResults = (
   officialTrailerKey
 ) => {
   return array.map((item) => {
-    const genreIds = item?.genre_ids;
-    const genre = genreIds
-      ? genreIds.map((id) => {
-          const a = genreTVList.genres.find((x) => x.id === id);
-          const b = genreMovieList.genres.find((x) => x.id === id);
-          if (a) {
-            return a;
-          }
-          if (b) {
-            return b;
-          }
-        })
-      : null;
+    let genre;
+    if (item.genres) {
+      genre = item.genres;
+    } else {
+      const genreIds = item?.genre_ids;
+      genre = genreIds
+        ? genreIds.map((id) => {
+            const a = genreTVList.genres.find((x) => x.id === id);
+            const b = genreMovieList.genres.find((x) => x.id === id);
+            if (a) {
+              return a;
+            }
+            if (b) {
+              return b;
+            }
+          })
+        : null;
+    }
     let video;
     if (officialTrailerKey !== true && officialTrailerKey) {
       video = officialTrailerKey.find((v) => v.id === item.id);

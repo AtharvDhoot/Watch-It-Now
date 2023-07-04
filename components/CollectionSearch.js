@@ -14,6 +14,17 @@ export default function CollectionSearch({
     fetcher
   );
   const { data: genreTVList, errorTv } = useSWR("/api/genre/tv/list", fetcher);
+
+  const officialTrailerKey = arr.map((item) => {
+    console.log(item);
+    const v = item?.videos?.results.find(
+      (video) => video.type === "Trailer" && video.official
+    );
+    if (!v) {
+      return true;
+    }
+    return { id: item.id, video: v };
+  });
   return (
     <>
       {searchTerm ? (
@@ -28,7 +39,8 @@ export default function CollectionSearch({
             CardNormal,
             media_type,
             genreMovieList,
-            genreTVList
+            genreTVList,
+            officialTrailerKey
           )}
         </section>
       ) : null}

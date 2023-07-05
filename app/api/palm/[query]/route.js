@@ -24,7 +24,6 @@ export async function GET(req, { params }) {
         text: prompt,
       },
     });
-    console.log(JSON.stringify(data));
     return NextResponse.json({ response: data[0].candidates[0].output });
   } catch (err) {
     return NextResponse.json(err);

@@ -11,12 +11,20 @@ export default function CollectionSearch({
 }) {
   const { data: genreMovieList, errorMovie } = useSWR(
     "/api/genre/movie/list",
-    fetcher
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
-  const { data: genreTVList, errorTv } = useSWR("/api/genre/tv/list", fetcher);
+  const { data: genreTVList, errorTv } = useSWR("/api/genre/tv/list", fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   const officialTrailerKey = arr.map((item) => {
-    console.log(item);
     const v = item?.videos?.results.find(
       (video) => video.type === "Trailer" && video.official
     );

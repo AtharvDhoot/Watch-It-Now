@@ -12,9 +12,18 @@ export default function Home() {
   const limitNormal = w <= "639" ? 4 : 8;
   const { data: movieGenreList, errorMovie } = useSWR(
     "/api/genre/movie/list",
-    fetcher
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
-  const { data: tvGenreList, errorTv } = useSWR("/api/genre/tv/list", fetcher);
+  const { data: tvGenreList, errorTv } = useSWR("/api/genre/tv/list", fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   if (errorMovie || errorTv) return <div>Error occurred</div>;
 
@@ -65,7 +74,7 @@ export default function Home() {
               href="/trending/all/day/1"
               limit={limitNormal}
               title="Trending"
-              type="Day"
+              type="Today"
               genreMovieList={movieGenreList}
               genreTVList={tvGenreList}
             />
@@ -76,7 +85,7 @@ export default function Home() {
               href="/trending/all/week/1"
               limit={limitNormal}
               title="Trending"
-              type="Week"
+              type="Weekly"
               genreMovieList={movieGenreList}
               genreTVList={tvGenreList}
             />

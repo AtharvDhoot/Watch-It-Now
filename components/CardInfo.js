@@ -1,11 +1,12 @@
 import Link from "next/link";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { usePathname } from "next/navigation";
 
 export default function CardInfo({ id, category, title, year, genre }) {
-  const handleWatchLaterClick = () => {
+  const handleAddWatchLaterClick = () => {
     if (category === "movie") {
       const ids = JSON.parse(localStorage.getItem("watch-later-movies"));
       if (ids) {
@@ -32,6 +33,23 @@ export default function CardInfo({ id, category, title, year, genre }) {
     toast.success("The title has been added in your watch later list.", {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
+  };
+
+  const handleRemoveClick = () => {
+    if (category === "movie") {
+      let ids = JSON.parse(localStorage.getItem("watch-later-movies"));
+      ids = ids.filter((item) => item !== id);
+      localStorage.setItem("watch-later-movies", JSON.stringify(ids));
+    }
+    if (category === "tv") {
+      let ids = JSON.parse(localStorage.getItem("watch-later-tv"));
+      ids = ids.filter((item) => item !== id);
+      localStorage.setItem("watch-later-tv", JSON.stringify(ids));
+    }
+    toast.success("The title has been removed in your watch later list.", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+    location.reload();
   };
 
   const pathname = usePathname();
@@ -65,11 +83,17 @@ export default function CardInfo({ id, category, title, year, genre }) {
         </div>
         {pathname !== "/watch-later" ? (
           <div className="grid place-items-center mr-2">
-            <button onClick={handleWatchLaterClick}>
+            <button onClick={handleAddWatchLaterClick}>
               <AddCircleOutlineIcon />
             </button>
           </div>
-        ) : null}
+        ) : (
+          <div className="grid place-items-center mr-2">
+            <button onClick={handleRemoveClick}>
+              <RemoveCircleOutlineIcon />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

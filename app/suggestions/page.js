@@ -47,6 +47,13 @@ async function getSearchResultData(titles) {
 }
 
 export default function Suggestions() {
+  if (
+    new Date().getTime() - localStorage.getItem("expireIn") >
+    24 * 60 * 60 * 1000
+  ) {
+    localStorage.setItem("count", 0);
+    localStorage.removeItem("expireIn");
+  }
   const [query, setQuery] = useState("");
 
   const [searchRes, setSearchRes] = useState(null);
@@ -73,7 +80,11 @@ export default function Suggestions() {
     } else {
       const nextCount = suggestionCount + 1;
       setSuggestionCount(nextCount);
-      if (nextCount > 10) {
+      if (nextCount === 1) {
+        localStorage.setItem("expireIn", new Date().getTime());
+      }
+      localStorage.setItem("count", nextCount);
+      if (localStorage.getItem("count") > 10) {
         window.my_modal_1.showModal();
         return;
       }
@@ -104,7 +115,7 @@ export default function Suggestions() {
             <form method="dialog" className="modal-box">
               <h3 className="font-bold text-lg">Wait a moment!</h3>
               <p className="py-4">
-                You have already used AI recommendations for 5 times. Please
+                You have already used AI recommendations for 10 times. Please
                 come back tomorrow.
               </p>
               <div className="modal-action">

@@ -18,7 +18,7 @@ export default function CardInfo({ id, category, title, year, genre }) {
       if (category === "tv") {
         await addTitle(user.uid, [], [id]);
       }
-    } else {
+    } else if (typeof window !== "undefined") {
       if (category === "movie") {
         const ids = JSON.parse(localStorage.getItem("watch-later-movies"));
         if (ids) {
@@ -56,7 +56,7 @@ export default function CardInfo({ id, category, title, year, genre }) {
       if (category === "tv") {
         await removeTitle(user.uid, [], [id]);
       }
-    } else {
+    } else if (typeof window !== "undefined") {
       if (category === "movie") {
         let ids = JSON.parse(localStorage.getItem("watch-later-movies"));
         ids = ids.filter((item) => item !== id);

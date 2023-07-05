@@ -17,7 +17,7 @@ import useAuth from "@/firebase/hooks/useAuth";
 export default function WatchLater() {
   const { user, isLoading } = useAuth();
   let url = null;
-  if (!user) {
+  if (typeof window !== "undefined" && !user) {
     const movieIds = encodeURIComponent(
       localStorage.getItem("watch-later-movies")
     );
@@ -70,7 +70,10 @@ export default function WatchLater() {
               autoClose={3000}
               hideProgressBar
               theme={
-                localStorage.getItem("theme") === "night" ? "dark" : "light"
+                typeof window !== "undefined" &&
+                localStorage.getItem("theme") === "night"
+                  ? "dark"
+                  : "light"
               }
               limit={1}
             />

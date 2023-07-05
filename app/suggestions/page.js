@@ -48,8 +48,9 @@ async function getSearchResultData(titles) {
 
 export default function Suggestions() {
   if (
+    typeof window !== "undefined" &&
     new Date().getTime() - localStorage.getItem("expireIn") >
-    24 * 60 * 60 * 1000
+      24 * 60 * 60 * 1000
   ) {
     localStorage.setItem("count", 0);
     localStorage.removeItem("expireIn");
@@ -80,13 +81,15 @@ export default function Suggestions() {
     } else {
       const nextCount = suggestionCount + 1;
       setSuggestionCount(nextCount);
-      if (nextCount === 1) {
-        localStorage.setItem("expireIn", new Date().getTime());
-      }
-      localStorage.setItem("count", nextCount);
-      if (localStorage.getItem("count") > 10) {
-        window.my_modal_1.showModal();
-        return;
+      if (typeof window !== "undefined") {
+        if (nextCount === 1) {
+          localStorage.setItem("expireIn", new Date().getTime());
+        }
+        localStorage.setItem("count", nextCount);
+        if (localStorage.getItem("count") > 10) {
+          window.my_modal_1.showModal();
+          return;
+        }
       }
       setSubmitted(true);
       const data = await getSearchResults(query);

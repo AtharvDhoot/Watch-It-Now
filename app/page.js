@@ -8,8 +8,11 @@ import { ToastContainer } from "react-toastify";
 import useSWR from "swr";
 
 export default function Home() {
-  const w = window.innerWidth;
-  const limitNormal = w <= "639" ? 4 : 8;
+  let limitNormal = 8;
+  if (typeof window !== "undefined") {
+    const w = window.innerWidth;
+    limitNormal = w <= "639" ? 4 : 8;
+  }
   const { data: movieGenreList, errorMovie } = useSWR(
     "/api/genre/movie/list",
     fetcher,
@@ -40,7 +43,10 @@ export default function Home() {
               autoClose={3000}
               hideProgressBar
               theme={
-                localStorage.getItem("theme") === "night" ? "dark" : "light"
+                typeof window !== "undefined" &&
+                localStorage.getItem("theme") === "night"
+                  ? "dark"
+                  : "light"
               }
               limit={1}
             />

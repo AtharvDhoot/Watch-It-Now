@@ -62,7 +62,12 @@ function Page() {
           position="bottom-right"
           autoClose={3000}
           hideProgressBar
-          theme={localStorage.getItem("theme") === "night" ? "dark" : "light"}
+          theme={
+            typeof window !== "undefined" &&
+            localStorage.getItem("theme") === "night"
+              ? "dark"
+              : "light"
+          }
           limit={1}
         />
         <div className="bg-primary bg-opacity-20 px-6 py-8 rounded-xl shadow-md w-full">

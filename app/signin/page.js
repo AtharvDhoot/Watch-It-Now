@@ -45,10 +45,11 @@ function Page() {
     if (error) {
       return console.log(error);
     }
+    await initial(result.user.uid);
     toast.success("Log in successfull, Redirecting", {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
-    setTimeout(() => router.push("/watch-later"), 2000);
+    setTimeout(() => router.push("/watch-later"), 1000);
   };
 
   const handleClickShowPassword = () => {

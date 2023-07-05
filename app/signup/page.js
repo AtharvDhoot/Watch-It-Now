@@ -32,7 +32,6 @@ function Page() {
       return console.log(error);
     }
 
-    console.log(result);
     return router.push("/admin");
   };
 
@@ -127,19 +126,6 @@ function Page() {
               </button>
             </div>
           </form>
-
-          {/* <div className="text-center text-sm mt-4">
-            By signing up, you agree to the{" "}
-            <a className="no-underline border-b border-base-content" href="#">
-              {" "}
-              Terms of Service
-            </a>{" "}
-            and
-            <a className="no-underline border-b border-base-content" href="#">
-              {" "}
-              Privacy Policy
-            </a>
-          </div> */}
         </div>
 
         <div className=" mt-6">

@@ -6,7 +6,13 @@ import SignIn from "@/firebase/auth/SignIn";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import GoogleIcon from "@mui/icons-material/Google";
+
 import Link from "next/link";
+import SignInGoogle from "@/firebase/auth/SignInGoogle";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { addTitle, initial } from "@/firebase/firestore/AddTitle";
 
 function Page() {
   const [email, setEmail] = useState("");
@@ -16,6 +22,21 @@ function Page() {
   });
   const router = useRouter();
 
+  const handleGoogleLoginIn = async () => {
+    const { result, error } = await SignInGoogle();
+    if (error) {
+      toast.error("Log in not successfull, Try again", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+      return;
+    }
+    await initial(result.user.uid);
+    toast.success("Log in successfull, Redirecting", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+    setTimeout(() => router.push("/watch-later"), 1000);
+  };
+
   const handleForm = async (event) => {
     event.preventDefault();
 
@@ -24,9 +45,10 @@ function Page() {
     if (error) {
       return console.log(error);
     }
-
-    console.log(result);
-    // return router.push("/admin");
+    toast.success("Log in successfull, Redirecting", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+    setTimeout(() => router.push("/watch-later"), 2000);
   };
 
   const handleClickShowPassword = () => {
@@ -36,6 +58,13 @@ function Page() {
   return (
     <div className="bg-base-100 h-[84vh] flex flex-col">
       <div className="container max-w-sm md:max-w-md mx-auto flex-1 flex flex-col items-center justify-center p-4 md:p-0">
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar
+          theme={localStorage.getItem("theme") === "night" ? "dark" : "light"}
+          limit={1}
+        />
         <div className="bg-primary bg-opacity-20 px-6 py-8 rounded-xl shadow-md w-full">
           <h1 className="mb-8 text-3xl text-center">Sign up</h1>
           <form onSubmit={handleForm}>
@@ -82,18 +111,12 @@ function Page() {
             </div>
           </form>
 
-          {/* <div className="text-center text-sm mt-4">
-            By signing up, you agree to the{" "}
-            <a className="no-underline border-b border-base-content" href="#">
-              {" "}
-              Terms of Service
-            </a>{" "}
-            and
-            <a className="no-underline border-b border-base-content" href="#">
-              {" "}
-              Privacy Policy
-            </a>
-          </div> */}
+          <button className="btn w-full mt-4" onClick={handleGoogleLoginIn}>
+            <div className="flex place-items-center text-xs sm:text-sm gap-1 sm:gap-2">
+              <GoogleIcon />
+              <div>Login In with Google</div>
+            </div>
+          </button>
         </div>
 
         <div className=" mt-6">

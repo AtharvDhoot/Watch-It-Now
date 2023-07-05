@@ -37,7 +37,9 @@ export default function CollectionSearch({
     <>
       {searchTerm ? (
         <h1 className="flex w-full place-content-center font-bold text-4xl mb-4">
-          {`Found ${totalResult} results for '${searchTerm}'`}
+          {`Found ${totalResult} results for '${decodeURIComponent(
+            searchTerm
+          )}'`}
         </h1>
       ) : null}
       {genreMovieList && genreTVList ? (

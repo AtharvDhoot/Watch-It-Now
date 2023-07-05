@@ -150,13 +150,6 @@ export default function Suggestions() {
             ) : (
               <Loading />
             ))}
-          {/* <div className="flex items-center justify-between mt-4">
-            <div className="text-xl">Want to sync your data? Sign Up!</div>
-            <div className="flex gap-4">
-              <button className="btn btn-primary">Sign Up</button>
-              <button className="btn btn-primary">Login</button>
-            </div>
-          </div> */}
         </div>
       </div>
     </>

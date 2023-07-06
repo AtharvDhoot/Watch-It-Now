@@ -1,34 +1,27 @@
-"use client";
-
 import Collection from "@/components/Collection";
 import Loading from "@/components/Loading";
 import SearchBar from "@/components/SearchBar";
-import { fetcher, pathToSearchAll } from "@/utils";
-import { ToastContainer } from "react-toastify";
-import useSWR from "swr";
+import Toast from "@/components/Toast";
+import { pathToSearchAll } from "@/utils";
 
-export default function Home() {
+async function getGenres() {
+  const movieGenreList = await fetch(
+    process.env.BASE_URL + "/api/genre/movie/list"
+  );
+  const tvGenreList = await fetch(process.env.BASE_URL + "/api/genre/tv/list");
+  return {
+    movieGenreList: await movieGenreList.json(),
+    tvGenreList: await tvGenreList.json(),
+  };
+}
+
+export default async function Home() {
   let limitNormal = 8;
   if (typeof window !== "undefined") {
     const w = window.innerWidth;
     limitNormal = w <= "639" ? 4 : 8;
   }
-  const { data: movieGenreList, errorMovie } = useSWR(
-    "/api/genre/movie/list",
-    fetcher,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    }
-  );
-  const { data: tvGenreList, errorTv } = useSWR("/api/genre/tv/list", fetcher, {
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
-
-  if (errorMovie || errorTv) return <div>Error occurred</div>;
+  const { movieGenreList, tvGenreList } = await getGenres();
 
   return (
     <>
@@ -38,18 +31,7 @@ export default function Home() {
             <div className="flex md:hidden mb-4 mx-4 pt-2">
               <SearchBar searchPath={pathToSearchAll} />
             </div>
-            <ToastContainer
-              position="bottom-right"
-              autoClose={3000}
-              hideProgressBar
-              theme={
-                typeof window !== "undefined" &&
-                localStorage.getItem("theme") === "night"
-                  ? "dark"
-                  : "light"
-              }
-              limit={1}
-            />
+            <Toast />
             <Collection
               isHomePage
               endpoint="/api/movie/popular/1?isFirst=true"

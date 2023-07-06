@@ -3,10 +3,9 @@
 import CollectionSearch from "@/components/CollectionSearch";
 import Loading from "@/components/Loading";
 import Pagination from "@/components/Pagination";
+import Toast from "@/components/Toast";
 import { fetcher, pathToSearchAll } from "@/utils";
 import { useSearchParams } from "next/navigation";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import useSWR from "swr";
 
 export default function Search({ params }) {
@@ -28,18 +27,7 @@ export default function Search({ params }) {
         <>
           <main className="bg-base-100">
             <div className="container mx-auto min-h-[84vh]">
-              <ToastContainer
-                position="bottom-right"
-                autoClose={3000}
-                hideProgressBar
-                theme={
-                  typeof window !== "undefined" &&
-                  localStorage.getItem("theme") === "night"
-                    ? "dark"
-                    : "light"
-                }
-                limit={1}
-              />
+              <Toast />
               <CollectionSearch
                 arr={filteredResults}
                 searchTerm={query}

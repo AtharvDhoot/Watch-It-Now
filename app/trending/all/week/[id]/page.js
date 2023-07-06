@@ -1,18 +1,20 @@
-"use client";
-
 import CollectionSearch from "@/components/CollectionSearch";
 import Loading from "@/components/Loading";
 import Pagination from "@/components/Pagination";
-import { fetcher } from "@/utils";
-import useSWR from "swr";
 
-export default function TrendingAllWeek({ params }) {
+async function getCurrentPage(currentPage) {
+  const response = await fetch(
+    process.env.BASE_URL + `/api/trending/all/week/${currentPage}`,
+    { next: { revalidate: 600 } }
+  );
+  const data = await response.json();
+  return data;
+}
+
+export default async function TrendingAllWeek({ params }) {
   const { id } = params;
   const currentPage = Number(id);
-  const { data, error } = useSWR(
-    `/api/trending/all/week/${currentPage}`,
-    fetcher
-  );
+  const data = await getCurrentPage(currentPage);
   const isFirst = currentPage === 1;
   const isLast = data ? currentPage === data.total_pages : false;
   return (

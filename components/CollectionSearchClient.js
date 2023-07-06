@@ -1,25 +1,30 @@
-import { renderResults, sliceArray } from "../utils";
+"use client";
+
+import { fetcher, renderResults, sliceArray } from "../utils";
 import CardNormal from "./CardNormal";
+import useSWR from "swr";
 
-async function getGenres() {
-  const movieGenreList = await fetch(
-    process.env.BASE_URL + "/api/genre/movie/list"
-  );
-  const tvGenreList = await fetch(process.env.BASE_URL + "/api/genre/tv/list");
-  return {
-    movieGenreList: await movieGenreList.json(),
-    tvGenreList: await tvGenreList.json(),
-  };
-}
-
-export default async function CollectionSearch({
+export default function CollectionSearchClient({
   arr = [],
   limit = 20,
   media_type,
   searchTerm,
   totalResult,
 }) {
-  const { movieGenreList, tvGenreList } = await getGenres();
+  const { data: genreMovieList, errorMovie } = useSWR(
+    "/api/genre/movie/list",
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
+  );
+  const { data: genreTVList, errorTv } = useSWR("/api/genre/tv/list", fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   const officialTrailerKey = arr.map((item) => {
     const v = item?.videos?.results.find(
@@ -30,7 +35,6 @@ export default async function CollectionSearch({
     }
     return { id: item.id, video: v };
   });
-
   return (
     <>
       {searchTerm ? (
@@ -40,14 +44,14 @@ export default async function CollectionSearch({
           )}'`}
         </h1>
       ) : null}
-      {movieGenreList && tvGenreList ? (
+      {genreMovieList && genreTVList ? (
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-between mx-6 sm:mx-0 gap-4">
           {renderResults(
             sliceArray(arr, limit),
             CardNormal,
             media_type,
-            movieGenreList,
-            tvGenreList,
+            genreMovieList,
+            genreTVList,
             officialTrailerKey
           )}
         </section>

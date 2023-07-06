@@ -3,16 +3,18 @@
 import useSWR from "swr";
 import { fetcher } from "@/utils";
 import Loading from "@/components/Loading";
-import CollectionSearch from "@/components/CollectionSearch";
+
 import Link from "next/link";
 
 import { SignOut } from "@/firebase/auth/SignOut";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getTitles } from "@/firebase/firestore/GetTitles";
 import { useState } from "react";
 import useAuth from "@/firebase/hooks/useAuth";
+import Toast from "@/components/Toast";
+import CollectionSearchClient from "@/components/CollectionSearchClient";
 
 export default function WatchLater() {
   const { user, isLoading } = useAuth();
@@ -65,18 +67,7 @@ export default function WatchLater() {
       ) : (
         <main className="bg-base-100">
           <div className="container mx-auto min-h-screen ">
-            <ToastContainer
-              position="bottom-right"
-              autoClose={3000}
-              hideProgressBar
-              theme={
-                typeof window !== "undefined" &&
-                localStorage.getItem("theme") === "night"
-                  ? "dark"
-                  : "light"
-              }
-              limit={1}
-            />
+            <Toast />
             {user ? (
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -89,7 +80,7 @@ export default function WatchLater() {
                 </div>
                 {datadb ? (
                   datadb.movieResults.length > 0 ? (
-                    <CollectionSearch
+                    <CollectionSearchClient
                       arr={datadb.movieResults}
                       media_type="movie"
                     />
@@ -106,7 +97,10 @@ export default function WatchLater() {
                 </div>
                 {datadb ? (
                   datadb.tvResults.length > 0 ? (
-                    <CollectionSearch arr={datadb.tvResults} media_type="tv" />
+                    <CollectionSearchClient
+                      arr={datadb.tvResults}
+                      media_type="tv"
+                    />
                   ) : (
                     <div className="font-medium tracking-wider ml-1.5 mb-6">
                       Add TV series by clicking on the plus icon!
@@ -136,7 +130,7 @@ export default function WatchLater() {
                 </div>
                 {datalocal ? (
                   datalocal.movieResults.length > 0 ? (
-                    <CollectionSearch
+                    <CollectionSearchClient
                       arr={datalocal.movieResults}
                       media_type="movie"
                     />
@@ -153,7 +147,7 @@ export default function WatchLater() {
                 </div>
                 {datalocal ? (
                   datalocal.tvResults.length > 0 ? (
-                    <CollectionSearch
+                    <CollectionSearchClient
                       arr={datalocal.tvResults}
                       media_type="tv"
                     />

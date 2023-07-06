@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { shimmer, toBase64 } from "../utils";
 import ReactPlayer from "react-player";
@@ -39,21 +41,25 @@ export default function CardImage({
               blurDataURL={`data:image/svg+xml;base64,${toBase64(
                 shimmer(2, 2)
               )}`}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           )
         ) : (
           <Link href={`/${category}/${id}`}>
-            <Image
-              className="rounded-lg"
-              src={src}
-              alt={alt}
-              fill
-              style={{ objectFit: "scale-down" }}
-              placeholder="blur"
-              blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                shimmer(2, 2)
-              )}`}
-            />
+            <div className="relative h-[200px] w-full">
+              <Image
+                className="rounded-lg"
+                src={src}
+                alt={alt}
+                fill
+                style={{ objectFit: "scale-down" }}
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                  shimmer(2, 2)
+                )}`}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
           </Link>
         )}
       </div>

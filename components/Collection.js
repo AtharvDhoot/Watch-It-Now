@@ -1,12 +1,14 @@
-"use client";
-
-import useSWR from "swr";
-import { fetcher, renderResults, sliceArray } from "../utils";
+import { renderResults, sliceArray } from "../utils";
 import CardNormal from "./CardNormal";
 import Heading from "./Heading";
 import Loading from "./Loading";
 
-export default function Collection({
+async function getMovies(endpoint) {
+  const response = await fetch(process.env.BASE_URL + endpoint);
+  const data = await response.json();
+  return data;
+}
+export default async function Collection({
   Component = CardNormal,
   endpoint,
   href,
@@ -18,12 +20,7 @@ export default function Collection({
   genreMovieList,
   genreTVList,
 }) {
-  const { data, error } = useSWR(endpoint, fetcher, {
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
-  if (error) return <div>Error occurred</div>;
+  const data = await getMovies(endpoint);
 
   const officialTrailerKey = data?.videos
     ? data.videos.map((item) => {

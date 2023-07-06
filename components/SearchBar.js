@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";

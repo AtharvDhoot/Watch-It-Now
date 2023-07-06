@@ -1,83 +1,7 @@
 import Link from "next/link";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { usePathname } from "next/navigation";
-import { addTitle } from "@/firebase/firestore/AddTitle";
-import { removeTitle } from "@/firebase/firestore/RemoveTitle";
-import useAuth from "@/firebase/hooks/useAuth";
-import { useRouter } from "next/navigation";
+import AddRemoveButton from "./AddRemoveButton";
 
 export default function CardInfo({ id, category, title, year, genre }) {
-  const { user, isLoading } = useAuth();
-  const router = useRouter();
-  const handleAddWatchLaterClick = async () => {
-    if (user) {
-      if (category === "movie") {
-        await addTitle(user.uid, [id], []);
-      }
-      if (category === "tv") {
-        await addTitle(user.uid, [], [id]);
-      }
-    } else if (typeof window !== "undefined") {
-      if (category === "movie") {
-        const ids = JSON.parse(localStorage.getItem("watch-later-movies"));
-        if (ids) {
-          !ids.includes(id)
-            ? localStorage.setItem(
-                "watch-later-movies",
-                JSON.stringify([...ids, id])
-              )
-            : toast.error("The title is already added in your watch list", {
-                position: toast.POSITION.BOTTOM_RIGHT,
-              });
-        } else {
-          localStorage.setItem("watch-later-movies", JSON.stringify([id]));
-        }
-      }
-      if (category === "tv") {
-        const ids = JSON.parse(localStorage.getItem("watch-later-tv"));
-        if (ids) {
-          localStorage.setItem("watch-later-tv", JSON.stringify([...ids, id]));
-        } else {
-          localStorage.setItem("watch-later-tv", JSON.stringify([id]));
-        }
-      }
-    }
-    toast.success("The title has been added in your watch later list.", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-    });
-  };
-
-  const handleRemoveClick = async () => {
-    if (user) {
-      if (category === "movie") {
-        await removeTitle(user.uid, [id], []);
-      }
-      if (category === "tv") {
-        await removeTitle(user.uid, [], [id]);
-      }
-    } else if (typeof window !== "undefined") {
-      if (category === "movie") {
-        let ids = JSON.parse(localStorage.getItem("watch-later-movies"));
-        ids = ids.filter((item) => item !== id);
-        localStorage.setItem("watch-later-movies", JSON.stringify(ids));
-      }
-      if (category === "tv") {
-        let ids = JSON.parse(localStorage.getItem("watch-later-tv"));
-        ids = ids.filter((item) => item !== id);
-        localStorage.setItem("watch-later-tv", JSON.stringify(ids));
-      }
-    }
-    toast.success("The title has been removed in your watch later list.", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-    });
-    router.refresh();
-  };
-
-  const pathname = usePathname();
-
   return (
     <div>
       <div className="flex justify-between mx-2">
@@ -105,19 +29,7 @@ export default function CardInfo({ id, category, title, year, genre }) {
             {title}
           </Link>
         </div>
-        {pathname !== "/watch-later" ? (
-          <div className="grid place-items-center mr-2">
-            <button onClick={handleAddWatchLaterClick}>
-              <AddCircleOutlineIcon />
-            </button>
-          </div>
-        ) : (
-          <div className="grid place-items-center mr-2">
-            <button onClick={handleRemoveClick}>
-              <RemoveCircleOutlineIcon />
-            </button>
-          </div>
-        )}
+        <AddRemoveButton category={category} id={id} />
       </div>
     </div>
   );

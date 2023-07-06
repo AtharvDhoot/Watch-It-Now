@@ -1,19 +1,23 @@
-"use client";
-
 import CollectionSearch from "@/components/CollectionSearch";
 import Loading from "@/components/Loading";
 import Pagination from "@/components/Pagination";
 import Toast from "@/components/Toast";
-import { fetcher, pathToSearchAll } from "@/utils";
+import { pathToSearchAll } from "@/utils";
 import { useSearchParams } from "next/navigation";
-import useSWR from "swr";
 
-export default function Search({ params }) {
+async function getCurrentSearchPage(query, page) {
+  const response = await fetch(
+    process.env.BASE_URL + `/api/search/${query}?page=${page}`,
+    { next: { revalidate: 600 } }
+  );
+  const data = await response.json();
+  return data;
+}
+
+export default async function Search({ params, searchParams }) {
   const { query } = params;
-  const searchParams = useSearchParams();
-  const page = searchParams.get("page");
-  const { data, error } = useSWR(`/api/search/${query}?page=${page}`, fetcher);
-
+  const page = searchParams.page;
+  const data = await getCurrentSearchPage(query, page);
   const currentPage = Number(page);
   const isFirst = currentPage === 1;
   const isLast = data ? currentPage === data.total_pages : false;

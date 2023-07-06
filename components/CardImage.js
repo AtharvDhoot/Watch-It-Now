@@ -39,7 +39,6 @@ export default function CardImage({
               blurDataURL={`data:image/svg+xml;base64,${toBase64(
                 shimmer(2, 2)
               )}`}
-              unoptimized
             />
           )
         ) : (
@@ -54,7 +53,6 @@ export default function CardImage({
               blurDataURL={`data:image/svg+xml;base64,${toBase64(
                 shimmer(2, 2)
               )}`}
-              unoptimized
             />
           </Link>
         )}

@@ -52,7 +52,6 @@ export default function Movie({ params }) {
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(
                       shimmer(2, 2)
                     )}`}
-                    unoptimized
                   />
                 ) : (
                   <ReactPlayer

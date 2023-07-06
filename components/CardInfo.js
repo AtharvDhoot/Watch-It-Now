@@ -7,9 +7,11 @@ import { usePathname } from "next/navigation";
 import { addTitle } from "@/firebase/firestore/AddTitle";
 import { removeTitle } from "@/firebase/firestore/RemoveTitle";
 import useAuth from "@/firebase/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 export default function CardInfo({ id, category, title, year, genre }) {
   const { user, isLoading } = useAuth();
+  const router = useRouter();
   const handleAddWatchLaterClick = async () => {
     if (user) {
       if (category === "movie") {
@@ -71,7 +73,7 @@ export default function CardInfo({ id, category, title, year, genre }) {
     toast.success("The title has been removed in your watch later list.", {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
-    location.reload();
+    router.refresh();
   };
 
   const pathname = usePathname();

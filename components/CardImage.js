@@ -22,7 +22,7 @@ export default function CardImage({
             <ReactPlayer
               width="100%"
               height="200px"
-              playing={hovering}
+              playing={false}
               pip
               controls={true}
               url={`https://www.youtube.com/watch?v=${officialTrailerKey.video.key}`}

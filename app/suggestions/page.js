@@ -105,12 +105,12 @@ export default function Suggestions() {
   return (
     <>
       <div className="bg-base-100">
-        <div className="container mx-auto min-h-screen">
-          <div className="grid w-full place-items-center pt-2">
-            <h1 className="text-5xl font-bold tracking-wider">
+        <div className="container mx-auto min-h-screen px-8">
+          <div className="grid w-full place-items-center pt-2 text-center">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-wider">
               Leave the Browsing to Us
             </h1>
-            <p className="text-2xl font-medium mt-1">
+            <p className="text-base md:text-2xl font-medium mt-1">
               AI-Powered Recommendations for Every Mood
             </p>
           </div>
@@ -127,7 +127,7 @@ export default function Suggestions() {
             </form>
           </dialog>
           <div className="grid place-items-center mt-8">
-            <div className="w-1/2">
+            <div className="w-3/4 md:w-1/2">
               <form
                 onSubmit={handleOnSubmit}
                 className="flex grow place-items-center"

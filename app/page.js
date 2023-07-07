@@ -3,6 +3,7 @@ import Collection from "@/components/Collection";
 import Loading from "@/components/Loading";
 import SearchBar from "@/components/SearchBar";
 import Toast from "@/components/Toast";
+import Link from "next/link";
 
 async function getGenres() {
   const movieGenreList = await fetch(
@@ -30,6 +31,12 @@ export default async function Home() {
           <div className="container mx-auto min-h-screen">
             <div className="flex md:hidden mb-4 mx-4 pt-2">
               <SearchBar searchPath={pathToSearchAll} />
+            </div>
+            <div className="mb-4 mx-6 md:mx-0 pt-2 text-xl">
+              Want Suggestions? Go{" "}
+              <Link href={"/suggestions"} className="underline">
+                Here
+              </Link>
             </div>
             <Toast />
             <Collection

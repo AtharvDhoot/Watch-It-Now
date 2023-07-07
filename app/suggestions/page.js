@@ -148,6 +148,9 @@ export default function Suggestions() {
                 />
               </form>
             </div>
+            <div className="text-sm mt-4">
+              Currently this works for only english titles*
+            </div>
           </div>
           {submitted &&
             (showRes ? (

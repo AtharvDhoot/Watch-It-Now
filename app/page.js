@@ -1,8 +1,8 @@
+import { pathToSearchAll } from "@/utils";
 import Collection from "@/components/Collection";
 import Loading from "@/components/Loading";
 import SearchBar from "@/components/SearchBar";
 import Toast from "@/components/Toast";
-import { pathToSearchAll } from "@/utils";
 
 async function getGenres() {
   const movieGenreList = await fetch(

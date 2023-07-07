@@ -1,19 +1,18 @@
 "use client";
 
-import useSWR from "swr";
-import { fetcher } from "@/utils";
-import Loading from "@/components/Loading";
-
+import { useState } from "react";
 import Link from "next/link";
-
-import { SignOut } from "@/firebase/auth/SignOut";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useSWR from "swr";
+
+import { fetcher } from "@/utils";
 import { getTitles } from "@/firebase/firestore/GetTitles";
-import { useState } from "react";
 import useAuth from "@/firebase/hooks/useAuth";
+import { SignOut } from "@/firebase/auth/SignOut";
 import Toast from "@/components/Toast";
+import Loading from "@/components/Loading";
 import CollectionSearchClient from "@/components/CollectionSearchClient";
 
 export default function WatchLater() {

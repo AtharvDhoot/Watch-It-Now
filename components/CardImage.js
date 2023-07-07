@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { shimmer, toBase64 } from "../utils";
-import ReactPlayer from "react-player";
-import Loading from "./Loading";
-import { useHover } from "@uidotdev/usehooks";
 import Link from "next/link";
+
+import ReactPlayer from "react-player";
+import { useHover } from "@uidotdev/usehooks";
+
+import Loading from "./Loading";
+import { shimmer, toBase64 } from "../utils";
 
 export default function CardImage({
   src,

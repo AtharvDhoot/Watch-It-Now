@@ -1,8 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function SearchBar({
   placeholder = "Search for movies or TV series",

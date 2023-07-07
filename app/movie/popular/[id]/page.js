@@ -1,7 +1,8 @@
+import { Suspense } from "react";
+
 import CollectionSearch from "@/components/CollectionSearch";
 import Loading from "@/components/Loading";
 import Pagination from "@/components/Pagination";
-import { Suspense } from "react";
 
 async function getCurrentPage(currentPage) {
   const response = await fetch(

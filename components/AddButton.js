@@ -1,8 +1,9 @@
 "use client";
 
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+
 import { addTitle } from "@/firebase/firestore/AddTitle";
 import useAuth from "@/firebase/hooks/useAuth";
 

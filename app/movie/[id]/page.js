@@ -1,17 +1,18 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
+import useSWR from "swr";
+import Image from "next/image";
+
+import ReactPlayer from "react-player";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LinkIcon from "@mui/icons-material/Link";
 import LaunchIcon from "@mui/icons-material/Launch";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
 import { TMDB_IMAGE_ENDPOINT, fetcher, shimmer, toBase64 } from "@/utils";
-import useSWR from "swr";
-import Image from "next/image";
-import { useState } from "react";
-import ReactPlayer from "react-player";
 import Loading from "@/components/Loading";
-import Link from "next/link";
 
 export default function Movie({ params }) {
   const { id } = params;

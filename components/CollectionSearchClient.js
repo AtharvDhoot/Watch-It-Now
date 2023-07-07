@@ -1,8 +1,9 @@
 "use client";
 
+import useSWR from "swr";
+
 import { fetcher, renderResults, sliceArray } from "../utils";
 import CardNormal from "./CardNormal";
-import useSWR from "swr";
 
 export default function CollectionSearchClient({
   arr = [],

@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
+import { pathToSearchAll } from "@/utils";
 import ChildDismissibleDropdown from "./ChildDismissibleDropdown";
 import { ThemeChangeButton } from "./ThemeChangeButton";
 import NavItems from "./NavItems";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
 import SearchBar from "./SearchBar";
-import { pathToSearchAll } from "@/utils";
 
 export default function Navbar(props) {
   return (

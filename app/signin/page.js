@@ -1,20 +1,20 @@
 "use client";
-import React, { useState } from "react";
 
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import SignIn from "@/firebase/auth/SignIn";
+import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import GoogleIcon from "@mui/icons-material/Google";
 
-import Link from "next/link";
+import { initial } from "@/firebase/firestore/AddTitle";
 import SignInGoogle from "@/firebase/auth/SignInGoogle";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { addTitle, initial } from "@/firebase/firestore/AddTitle";
+import SignIn from "@/firebase/auth/SignIn";
 
-function Page() {
+export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState({
     password: "",
@@ -72,7 +72,7 @@ function Page() {
           limit={1}
         />
         <div className="bg-primary bg-opacity-20 px-6 py-8 rounded-xl shadow-md w-full">
-          <h1 className="mb-8 text-3xl text-center">Sign up</h1>
+          <h1 className="mb-8 text-3xl text-center">Sign In</h1>
           <form onSubmit={handleForm}>
             <div className="grid gap-6">
               <input
@@ -138,5 +138,3 @@ function Page() {
     </div>
   );
 }
-
-export default Page;

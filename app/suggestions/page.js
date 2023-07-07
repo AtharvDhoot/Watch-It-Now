@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
+
+import SearchIcon from "@mui/icons-material/Search";
+
+import { search } from "@/lib/tmdb";
 import CollectionSearch from "@/components/CollectionSearch";
 import Loading from "@/components/Loading";
-import { search } from "@/lib/tmdb";
-import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
 
 async function getSearchResults(query) {
   const response = await fetch(`/api/palm/${query}`);

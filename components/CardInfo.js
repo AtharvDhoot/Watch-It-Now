@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import AddRemoveButton from "./AddRemoveButton";
 
 export default function CardInfo({ id, category, title, year, genre }) {

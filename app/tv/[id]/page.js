@@ -1,17 +1,18 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import useSWR from "swr";
+import ReactPlayer from "react-player";
+
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LinkIcon from "@mui/icons-material/Link";
 import LaunchIcon from "@mui/icons-material/Launch";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
-import Loading from "@/components/Loading";
 import { TMDB_IMAGE_ENDPOINT, fetcher, shimmer, toBase64 } from "@/utils";
-import useSWR from "swr";
-import Image from "next/image";
-import { useState } from "react";
-import ReactPlayer from "react-player";
-import Link from "next/link";
+import Loading from "@/components/Loading";
 
 export default function Tv({ params }) {
   const { id } = params;

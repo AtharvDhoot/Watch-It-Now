@@ -1,17 +1,18 @@
 "use client";
+
 import React, { useState } from "react";
-
 import { useRouter } from "next/navigation";
-import SignUp from "@/firebase/auth/SignUp";
-
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Link from "next/link";
-import { initial } from "@/firebase/firestore/AddTitle";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function Page() {
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
+import { initial } from "@/firebase/firestore/AddTitle";
+import SignUp from "@/firebase/auth/SignUp";
+
+export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState({
     password: "",
@@ -159,5 +160,3 @@ function Page() {
     </div>
   );
 }
-
-export default Page;

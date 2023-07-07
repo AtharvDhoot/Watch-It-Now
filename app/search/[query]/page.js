@@ -1,9 +1,10 @@
+import { Suspense } from "react";
+
+import { pathToSearchAll } from "@/utils";
 import CollectionSearch from "@/components/CollectionSearch";
 import Loading from "@/components/Loading";
 import Pagination from "@/components/Pagination";
 import Toast from "@/components/Toast";
-import { pathToSearchAll } from "@/utils";
-import { useSearchParams } from "next/navigation";
 
 async function getCurrentSearchPage(query, page) {
   const response = await fetch(
@@ -27,30 +28,36 @@ export default async function Search({ params, searchParams }) {
 
   return (
     <>
-      {data ? (
-        <>
-          <main className="bg-base-100">
-            <div className="container mx-auto min-h-[84vh]">
-              <Toast />
-              <CollectionSearch
-                arr={filteredResults}
-                searchTerm={query}
-                totalResult={data.total_results}
-              />
-              <Pagination
-                currentPage={currentPage}
-                prevHref={`${pathToSearchAll}${query}?page=${currentPage - 1}`}
-                nextHref={`${pathToSearchAll}${query}?page=${currentPage + 1}`}
-                isFirst={isFirst}
-                isLast={isLast}
-                totalPages={data.total_pages}
-              />
-            </div>
-          </main>
-        </>
-      ) : (
-        <Loading />
-      )}
+      <Suspense>
+        {data ? (
+          <>
+            <main className="bg-base-100">
+              <div className="container mx-auto min-h-[84vh]">
+                <Toast />
+                <CollectionSearch
+                  arr={filteredResults}
+                  searchTerm={query}
+                  totalResult={data.total_results}
+                />
+                <Pagination
+                  currentPage={currentPage}
+                  prevHref={`${pathToSearchAll}${query}?page=${
+                    currentPage - 1
+                  }`}
+                  nextHref={`${pathToSearchAll}${query}?page=${
+                    currentPage + 1
+                  }`}
+                  isFirst={isFirst}
+                  isLast={isLast}
+                  totalPages={data.total_pages}
+                />
+              </div>
+            </main>
+          </>
+        ) : (
+          <Loading />
+        )}
+      </Suspense>
     </>
   );
 }

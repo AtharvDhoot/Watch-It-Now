@@ -1,11 +1,13 @@
 "use client";
 
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import { useRouter } from "next/navigation";
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+
 import { removeTitle } from "@/firebase/firestore/RemoveTitle";
 import useAuth from "@/firebase/hooks/useAuth";
-import { useRouter } from "next/navigation";
 
 export function RemoveButton({ category, id }) {
   const { user, isLoading } = useAuth();

@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import CollectionSearch from "@/components/CollectionSearch";
 import Loading from "@/components/Loading";
 import Pagination from "@/components/Pagination";
@@ -20,28 +22,30 @@ export default async function PopularTVSeries({ params }) {
 
   return (
     <>
-      <main className="bg-base-100">
-        <div className="container mx-auto">
-          {data ? (
-            <>
-              <h1 className="flex w-full place-content-center font-bold text-4xl mb-4">
-                Popular TV Series
-              </h1>
-              <CollectionSearch arr={data.results} media_type="tv" />
-              <Pagination
-                currentPage={currentPage}
-                prevHref={`/tv/popular/${currentPage - 1}`}
-                nextHref={`/tv/popular/${currentPage + 1}`}
-                isFirst={isFirst}
-                isLast={isLast}
-                totalPages={data.total_pages}
-              />
-            </>
-          ) : (
-            <Loading />
-          )}
-        </div>
-      </main>
+      <Suspense>
+        <main className="bg-base-100">
+          <div className="container mx-auto">
+            {data ? (
+              <>
+                <h1 className="flex w-full place-content-center font-bold text-4xl mb-4">
+                  Popular TV Series
+                </h1>
+                <CollectionSearch arr={data.results} media_type="tv" />
+                <Pagination
+                  currentPage={currentPage}
+                  prevHref={`/tv/popular/${currentPage - 1}`}
+                  nextHref={`/tv/popular/${currentPage + 1}`}
+                  isFirst={isFirst}
+                  isLast={isLast}
+                  totalPages={data.total_pages}
+                />
+              </>
+            ) : (
+              <Loading />
+            )}
+          </div>
+        </main>
+      </Suspense>
     </>
   );
 }

@@ -1,7 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
 import tmdbLogo from "../public/tmdb.svg";
-import Image from "next/image";
 
 const Footer = () => {
   return (

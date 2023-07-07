@@ -1,8 +1,9 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+
 import { AddButton } from "./AddButton";
 import { RemoveButton } from "./RemoveButton";
-import { usePathname } from "next/navigation";
 
 export default function AddRemoveButton({ category, id }) {
   const pathname = usePathname();

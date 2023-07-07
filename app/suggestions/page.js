@@ -5,7 +5,7 @@ import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 
 import { search } from "@/lib/tmdb";
-import CollectionSearch from "@/components/CollectionSearch";
+import CollectionSearchClient from "@/components/CollectionSearchClient";
 import Loading from "@/components/Loading";
 
 async function getSearchResults(query) {
@@ -156,7 +156,7 @@ export default function Suggestions() {
                   Here are the Recommendations
                 </div>
                 {searchRes.results.length > 0 ? (
-                  <CollectionSearch arr={searchRes.results} />
+                  <CollectionSearchClient arr={searchRes.results} />
                 ) : (
                   <div>
                     Can&apos;t find any recommendations. Please try again

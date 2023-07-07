@@ -4,6 +4,11 @@ import CollectionSearch from "@/components/CollectionSearch";
 import Loading from "@/components/Loading";
 import Pagination from "@/components/Pagination";
 
+export const metadata = {
+  title: "Popular TV Series | Watch It Now",
+  description: "Popular TV Series",
+};
+
 async function getCurrentPage(currentPage) {
   const response = await fetch(
     process.env.BASE_URL + `/api/tv/popular/${currentPage}`,

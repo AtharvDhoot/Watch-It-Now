@@ -9,7 +9,7 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Watch It Now",
-  description: "A recommendation system",
+  description: "AI powered recommendation system",
 };
 
 export default function RootLayout({ children }) {

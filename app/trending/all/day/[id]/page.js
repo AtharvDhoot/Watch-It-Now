@@ -4,6 +4,11 @@ import CollectionSearch from "@/components/CollectionSearch";
 import Loading from "@/components/Loading";
 import Pagination from "@/components/Pagination";
 
+export const metadata = {
+  title: "Daily Trending Page | Watch It Now",
+  description: "Today's Trending Titles",
+};
+
 async function getCurrentPage(currentPage) {
   const response = await fetch(
     process.env.BASE_URL + `/api/trending/all/day/${currentPage}`,

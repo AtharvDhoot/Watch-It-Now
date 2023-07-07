@@ -15,6 +15,11 @@ async function getCurrentSearchPage(query, page) {
   return data;
 }
 
+export const metadata = {
+  title: "Search page | Watch It Now",
+  description: "Results of the search are shown here",
+};
+
 export default async function Search({ params, searchParams }) {
   const { query } = params;
   const page = searchParams.page;

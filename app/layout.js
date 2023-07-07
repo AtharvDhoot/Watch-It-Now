@@ -20,10 +20,10 @@ export default function RootLayout({ children }) {
           <Navbar
             title={{ label: Constants.fullName, route: "/" }}
             navItems={[
-              { label: "Home", route: "/" },
+              { label: "Suggestions", route: "/" },
               {
-                label: Constants.suggestionsLabel,
-                route: Constants.suggestionsLink,
+                label: Constants.discoverLabel,
+                route: Constants.discoverLink,
               },
               {
                 label: Constants.watchLaterLabel,

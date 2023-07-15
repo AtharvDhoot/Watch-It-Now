@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
@@ -216,11 +216,12 @@ export default function SuggestionPageSearch() {
                   isMulti
                   className="w-3/4 ml-6"
                   classNames={{
-                    control: () => "bg-base-100 border-black rounded-lg p-2",
-                    menu: () => "bg-base-100",
-                    option: () => "bg-base-100 hover:bg-base-200",
-                    multiValue: () => "badge badge-outline",
-                    multiValueLabel: () => "text-base-content",
+                    control: () =>
+                      "!bg-base-100 !border-black !rounded-lg !p-2",
+                    menu: () => "!bg-base-100",
+                    option: () => "!bg-base-100 !hover:bg-base-200",
+                    multiValue: () => "!badge !badge-outline",
+                    multiValueLabel: () => "!text-base-content",
                   }}
                   closeMenuOnSelect={false}
                 />

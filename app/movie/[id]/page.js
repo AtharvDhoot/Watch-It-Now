@@ -16,12 +16,13 @@ import Loading from "@/components/Loading";
 
 export default function Movie({ params }) {
   const { id } = params;
-  const { data: movie, error: movieError } = useSWR(
-    `/api/movie/${id}`,
-    fetcher
-  );
+  const {
+    data: movie,
+    error: movieError,
+    isLoading,
+  } = useSWR(`/api/movie/${id}`, fetcher);
   const [image, setImage] = useState(true);
-
+  if (isLoading) return <Loading />;
   if (movieError) return <div>{movieError}</div>;
   if (!movie) return <div>{movieError}</div>;
 

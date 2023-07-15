@@ -16,9 +16,14 @@ import Loading from "@/components/Loading";
 
 export default function Tv({ params }) {
   const { id } = params;
-  const { data: tv, error: tvError } = useSWR(`/api/tv/${id}`, fetcher);
+  const {
+    data: tv,
+    error: tvError,
+    isLoading,
+  } = useSWR(`/api/tv/${id}`, fetcher);
   const [image, setImage] = useState(true);
 
+  if (isLoading) return <Loading />;
   if (tvError) return <div>{tvError}</div>;
   if (!tv) return <div>{tvError}</div>;
 

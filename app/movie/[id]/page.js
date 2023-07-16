@@ -66,9 +66,11 @@ export default function Movie({ params }) {
                   />
                 )}
               </div>
-              <div className="mt-16 text-base-content">
-                <h1 className="text-5xl font-medium">{movie?.detail?.title}</h1>
-                <h3 className="text-xl font-normal mt-2">
+              <div className="mt-16 text-base-content sm:p-8 lg:p-0">
+                <h1 className="text-3xl md:text-5xl font-medium">
+                  {movie?.detail?.title}
+                </h1>
+                <h3 className="text-base md:text-xl font-normal mt-2">
                   {movie?.detail?.tagline}
                 </h3>
                 <div className="flex items-center mt-4 text-2xl">
@@ -121,7 +123,7 @@ export default function Movie({ params }) {
                   ))}
                 </div>
                 <div className="grid mt-6">
-                  <p className="font-semibold text-2xl ">Genres</p>
+                  <p className="font-semibold text-xl md:text-2xl ">Genres</p>
                   <div className="flex gap-2 mt-2 flex-wrap">
                     {movie?.detail?.genres.map((item) => (
                       <div
@@ -134,12 +136,12 @@ export default function Movie({ params }) {
                   </div>
                 </div>
                 <div className="grid mt-6">
-                  <p className="font-semibold text-2xl ">Synopsis</p>
+                  <p className="font-semibold text-xl md:text-2xl ">Synopsis</p>
                   <div className="text-sm">{movie?.detail?.overview}</div>
                 </div>
                 {movie?.credits?.cast.length > 0 ? (
                   <div className="grid mt-6">
-                    <p className="font-semibold text-2xl ">Cast</p>
+                    <p className="font-semibold text-xl md:text-2xl ">Cast</p>
                     <div className="flex gap-2 mt-2 flex-wrap">
                       {movie?.credits?.cast
                         .filter((item) => item.order < 5)

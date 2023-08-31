@@ -4,6 +4,8 @@ import Loading from "@/components/Loading";
 import SearchBar from "@/components/SearchBar";
 import Toast from "@/components/Toast";
 
+export const dynamic = "force-dynamic";
+
 async function getGenres() {
   const movieGenreList = await fetch(
     process.env.BASE_URL + "/api/genre/movie/list"

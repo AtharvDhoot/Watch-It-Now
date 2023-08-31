@@ -10,6 +10,7 @@ async function getMovies(endpoint) {
   const data = await response.json();
   return data;
 }
+
 export default async function Collection({
   Component = CardNormal,
   endpoint,

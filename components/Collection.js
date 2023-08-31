@@ -5,7 +5,7 @@ import Loading from "./Loading";
 
 async function getMovies(endpoint) {
   const response = await fetch(process.env.BASE_URL + endpoint, {
-    next: { revalidate: 86400 },
+    cache: "no-store",
   });
   const data = await response.json();
   return data;
